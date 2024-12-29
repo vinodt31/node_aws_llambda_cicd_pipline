@@ -1,0 +1,30 @@
+service: serverless-app
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+
+functions:
+  hello:
+    handler: src/handlers/hello.handler
+    events:
+      - http:
+          path: hello
+          method: get
+
+  createItem:
+    handler: src/handlers/createItem.handler
+    events:
+      - http:
+          path: items
+          method: post
+
+  getItem:
+    handler: src/handlers/getItem.handler
+    events:
+      - http:
+          path: items/{id}
+          method: get
