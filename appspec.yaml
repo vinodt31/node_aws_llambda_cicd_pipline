@@ -1,4 +1,4 @@
-version: 1.2
+version: 1.5
 Resources:
   - testFunction:
       Type: AWS::Lambda::Function
@@ -7,6 +7,8 @@ Resources:
         Alias: live
         CurrentVersion: 1
         TargetVersion: 2
+        S3Location: s3://codepipeline-us-east-1-223731750623/test_app_pipline/your-lambda-package.zip
+
 Hooks:
   BeforeAllowTraffic:
     - location: scripts/validate_before_traffic.sh
