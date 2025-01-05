@@ -1,30 +1,44 @@
-service: serverless-app
-
-frameworkVersion: '3'
+service: serverless-crud-ts
 
 provider:
   name: aws
   runtime: nodejs18.x
-  region: us-east-1
 
 functions:
-  hello:
-    handler: src/handlers/hello.handler
-    events:
-      - http:
-          path: hello
-          method: get
-
   createItem:
-    handler: src/handlers/createItem.handler
+    handler: dist/handlers/crud.createItem
     events:
       - http:
           path: items
           method: post
 
   getItem:
-    handler: src/handlers/getItem.handler
+    handler: dist/handlers/crud.getItem
     events:
       - http:
           path: items/{id}
           method: get
+
+  getAllItems:
+    handler: dist/handlers/crud.getAllItems
+    events:
+      - http:
+          path: items
+          method: get
+
+  updateItem:
+    handler: dist/handlers/crud.updateItem
+    events:
+      - http:
+          path: items/{id}
+          method: put
+
+  deleteItem:
+    handler: dist/handlers/crud.deleteItem
+    events:
+      - http:
+          path: items/{id}
+          method: delete
+
+plugins:
+  - serverless-offline
