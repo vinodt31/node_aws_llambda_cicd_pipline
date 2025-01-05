@@ -1,0 +1,16 @@
+version: 1.0
+Resources:
+  - myLambdaFunction:
+      Type: AWS::Lambda::Function
+      Properties:
+        Name: my-function-name
+        Alias: my-alias
+        CurrentVersion: 1
+        TargetVersion: 2
+Hooks:
+  BeforeAllowTraffic:
+    - location: BeforeAllowTrafficHookFunctionName
+      timeout: 300
+  AfterAllowTraffic:
+    - location: AfterAllowTrafficHookFunctionName
+      timeout: 300
